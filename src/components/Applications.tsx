@@ -9,7 +9,8 @@ import {
   Settings,
   LucideIcon,
 } from "lucide-react";
-import FadeIn from "./FadeIn";
+import { motion } from "framer-motion";
+import FadeIn, { StaggerContainer, StaggerItem } from "./FadeIn";
 import { useLanguage } from "@/i18n/LanguageContext";
 import translations from "@/i18n/translations";
 
@@ -27,7 +28,9 @@ export default function Applications() {
   const a = translations.applications;
 
   return (
-    <section id="applications" className="py-24 lg:py-32 bg-white">
+    <section id="applications" className="py-24 lg:py-32 bg-white relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <FadeIn>
@@ -47,14 +50,20 @@ export default function Applications() {
           </FadeIn>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <StaggerContainer
+          className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6"
+          staggerDelay={0.1}
+        >
           {a.items.map((app, i) => {
             const Icon = appIcons[i];
             return (
-              <FadeIn key={i} delay={0.08 * i}>
-                <div className="group relative bg-muted rounded-2xl p-7 border border-border/40 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 h-full">
+              <StaggerItem key={i}>
+                <motion.div
+                  whileHover={{ y: -6, transition: { duration: 0.3 } }}
+                  className="group relative bg-muted rounded-2xl p-7 border border-border/40 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 transition-all duration-500 h-full"
+                >
                   <div className="flex items-start justify-between mb-5">
-                    <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm group-hover:shadow-md transition-shadow">
+                    <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center shadow-sm group-hover:shadow-lg group-hover:scale-110 transition-all duration-300">
                       <Icon
                         size={22}
                         className="text-accent"
@@ -71,11 +80,11 @@ export default function Applications() {
                   <p className="text-sm text-gray-500 leading-relaxed">
                     {t(app.description)}
                   </p>
-                </div>
-              </FadeIn>
+                </motion.div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
 
         <FadeIn delay={0.3}>
           <p className="text-center mt-10 text-sm text-gray-400 max-w-2xl mx-auto">

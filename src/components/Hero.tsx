@@ -1,6 +1,12 @@
 "use client";
 
 import { ArrowRight, ChevronDown } from "lucide-react";
+import {
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useRef } from "react";
 import FadeIn from "./FadeIn";
 import { useLanguage } from "@/i18n/LanguageContext";
 import translations from "@/i18n/translations";
@@ -8,92 +14,126 @@ import translations from "@/i18n/translations";
 export default function Hero() {
   const { t } = useLanguage();
   const h = translations.hero;
+  const ref = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: ref,
+    offset: ["start start", "end start"],
+  });
+
+  const bgY = useTransform(scrollYProgress, [0, 1], [0, 150]);
+  const orbScale = useTransform(scrollYProgress, [0, 1], [1, 1.4]);
+  const orbOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+  const imageY = useTransform(scrollYProgress, [0, 1], [0, 60]);
+  const floatingY = useTransform(scrollYProgress, [0, 1], [0, 80]);
 
   return (
-    <section className="relative min-h-screen flex items-center pt-16 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-br from-muted via-white to-muted" />
-      <div className="absolute top-20 right-0 w-[600px] h-[600px] rounded-full bg-accent/5 blur-3xl" />
-      <div className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-primary/3 blur-3xl" />
+    <section
+      ref={ref}
+      className="relative min-h-screen flex items-center pt-16 overflow-hidden"
+    >
+      <motion.div
+        style={{ y: bgY }}
+        className="absolute inset-0 bg-gradient-to-br from-muted via-white to-muted"
+      />
+      <motion.div
+        style={{ scale: orbScale, opacity: orbOpacity }}
+        className="absolute top-20 right-0 w-[600px] h-[600px] rounded-full bg-accent/5 blur-3xl animate-pulse-soft"
+      />
+      <motion.div
+        style={{ scale: orbScale, opacity: orbOpacity }}
+        className="absolute bottom-0 left-0 w-[400px] h-[400px] rounded-full bg-primary/3 blur-3xl animate-pulse-soft"
+      />
 
       <div className="relative max-w-7xl mx-auto px-6 lg:px-8 w-full py-20 lg:py-32">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
           <div className="max-w-2xl">
-            <FadeIn>
+            <FadeIn duration={0.8}>
               <div className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-primary/5 border border-primary/10 mb-8">
-                <div className="w-2 h-2 rounded-full bg-accent" />
+                <motion.div
+                  animate={{ scale: [1, 1.3, 1] }}
+                  transition={{ duration: 2, repeat: Infinity }}
+                  className="w-2 h-2 rounded-full bg-accent"
+                />
                 <span className="text-sm font-medium text-primary/70">
                   {t(h.badge)}
                 </span>
               </div>
             </FadeIn>
 
-            <FadeIn delay={0.1}>
+            <FadeIn delay={0.15} duration={0.9} distance={40}>
               <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary leading-[1.1] tracking-tight">
                 {t(h.headlineMain)}
-                <span className="block text-accent mt-2">
+                <motion.span
+                  initial={{ opacity: 0, x: -20 }}
+                  animate={{ opacity: 1, x: 0 }}
+                  transition={{ delay: 0.8, duration: 0.7, ease: "easeOut" }}
+                  className="block text-accent mt-2"
+                >
                   {t(h.headlineAccent)}
-                </span>
+                </motion.span>
               </h1>
             </FadeIn>
 
-            <FadeIn delay={0.2}>
+            <FadeIn delay={0.3} duration={0.8}>
               <p className="mt-6 text-lg text-gray-600 leading-relaxed max-w-xl">
                 {t(h.description)}
               </p>
             </FadeIn>
 
-            <FadeIn delay={0.3}>
+            <FadeIn delay={0.45}>
               <div className="flex flex-wrap gap-4 mt-10">
-                <a
+                <motion.a
                   href="#applications"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white font-medium rounded-full hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/20"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white font-medium rounded-full hover:bg-primary/90 transition-colors hover:shadow-xl hover:shadow-primary/20"
                 >
                   {t(h.ctaPrimary)}
-                  <ArrowRight size={18} />
-                </a>
-                <a
+                  <motion.span
+                    animate={{ x: [0, 4, 0] }}
+                    transition={{ duration: 1.5, repeat: Infinity }}
+                  >
+                    <ArrowRight size={18} />
+                  </motion.span>
+                </motion.a>
+                <motion.a
                   href="#display"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-border text-primary font-medium rounded-full hover:bg-muted transition-all"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-border text-primary font-medium rounded-full hover:bg-muted transition-colors hover:border-accent/30"
                 >
                   {t(h.ctaSecondary)}
-                </a>
+                </motion.a>
               </div>
             </FadeIn>
 
-            <FadeIn delay={0.4}>
+            <FadeIn delay={0.6}>
               <div className="flex items-center gap-8 mt-12 pt-8 border-t border-border/60">
-                <div>
-                  <p className="text-2xl font-bold text-primary">
-                    {t(h.statSteelTitle)}
-                  </p>
-                  <p className="text-sm text-gray-500">{t(h.statSteelSub)}</p>
-                </div>
-                <div className="w-px h-10 bg-border" />
-                <div>
-                  <p className="text-2xl font-bold text-primary">
-                    {t(h.statModularTitle)}
-                  </p>
-                  <p className="text-sm text-gray-500">
-                    {t(h.statModularSub)}
-                  </p>
-                </div>
-                <div className="w-px h-10 bg-border" />
-                <div>
-                  <p className="text-2xl font-bold text-primary">
-                    {t(h.statAuTitle)}
-                  </p>
-                  <p className="text-sm text-gray-500">{t(h.statAuSub)}</p>
-                </div>
+                {[
+                  { title: h.statSteelTitle, sub: h.statSteelSub },
+                  { title: h.statModularTitle, sub: h.statModularSub },
+                  { title: h.statAuTitle, sub: h.statAuSub },
+                ].map((stat, i) => (
+                  <div key={i} className="flex items-center gap-8">
+                    {i > 0 && <div className="w-px h-10 bg-border -ml-8" />}
+                    <div>
+                      <p className="text-2xl font-bold text-primary">
+                        {t(stat.title)}
+                      </p>
+                      <p className="text-sm text-gray-500">{t(stat.sub)}</p>
+                    </div>
+                  </div>
+                ))}
               </div>
             </FadeIn>
           </div>
 
-          <FadeIn delay={0.2} direction="left">
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden relative">
+          <FadeIn delay={0.3} direction="left" distance={50} duration={1}>
+            <motion.div style={{ y: imageY }} className="relative">
+              <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-gray-100 to-gray-200 overflow-hidden relative group">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-white/80 backdrop-blur flex items-center justify-center shadow-sm">
+                    <div className="w-20 h-20 mx-auto mb-4 rounded-2xl bg-white/80 backdrop-blur flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500">
                       <svg
                         width="32"
                         height="32"
@@ -115,19 +155,24 @@ export default function Hero() {
                   </div>
                 </div>
                 <div className="absolute bottom-4 left-4 right-4 flex gap-2">
-                  <div className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-primary/70">
-                    {t(h.tagSteel)}
-                  </div>
-                  <div className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-primary/70">
-                    {t(h.tagPrefab)}
-                  </div>
-                  <div className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-primary/70">
-                    {t(h.tagModular)}
-                  </div>
+                  {[h.tagSteel, h.tagPrefab, h.tagModular].map((tag, i) => (
+                    <motion.div
+                      key={i}
+                      initial={{ opacity: 0, y: 10 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{ delay: 1 + i * 0.15 }}
+                      className="px-3 py-1.5 rounded-full bg-white/90 backdrop-blur-sm text-xs font-medium text-primary/70"
+                    >
+                      {t(tag)}
+                    </motion.div>
+                  ))}
                 </div>
               </div>
 
-              <div className="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-xl shadow-black/5 border border-border/60">
+              <motion.div
+                style={{ y: floatingY }}
+                className="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-xl shadow-black/5 border border-border/60 animate-float"
+              >
                 <p className="text-xs text-gray-400 font-medium">
                   {t(h.floatingLabel)}
                 </p>
@@ -135,14 +180,24 @@ export default function Hero() {
                   {t(h.floatingTitle)}
                 </p>
                 <p className="text-xs text-gray-500">{t(h.floatingDesc)}</p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </FadeIn>
         </div>
 
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 animate-bounce">
-          <ChevronDown className="text-gray-300" size={24} />
-        </div>
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1.5 }}
+          className="absolute bottom-8 left-1/2 -translate-x-1/2"
+        >
+          <motion.div
+            animate={{ y: [0, 8, 0] }}
+            transition={{ duration: 2, repeat: Infinity, ease: "easeInOut" }}
+          >
+            <ChevronDown className="text-gray-300" size={24} />
+          </motion.div>
+        </motion.div>
       </div>
     </section>
   );

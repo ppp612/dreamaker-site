@@ -1,7 +1,8 @@
 "use client";
 
 import { Sofa, Bed, CookingPot, Bath, LucideIcon } from "lucide-react";
-import FadeIn from "./FadeIn";
+import { motion } from "framer-motion";
+import FadeIn, { StaggerContainer, StaggerItem } from "./FadeIn";
 import { useLanguage } from "@/i18n/LanguageContext";
 import translations from "@/i18n/translations";
 
@@ -18,7 +19,9 @@ export default function InteriorShowcase() {
   const n = translations.interior;
 
   return (
-    <section className="py-24 lg:py-32 bg-white">
+    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <FadeIn>
@@ -38,21 +41,30 @@ export default function InteriorShowcase() {
           </FadeIn>
         </div>
 
-        <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StaggerContainer
+          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          staggerDelay={0.12}
+        >
           {n.spaces.map((space, i) => {
             const Icon = spaceIcons[i];
             return (
-              <FadeIn key={i} delay={0.1 * i}>
-                <div className="group cursor-pointer">
+              <StaggerItem key={i}>
+                <motion.div
+                  whileHover={{ y: -8, transition: { duration: 0.3 } }}
+                  className="group cursor-pointer"
+                >
                   <div
-                    className={`aspect-[3/4] rounded-2xl bg-gradient-to-br ${gradients[i]} overflow-hidden relative border border-border/30 group-hover:shadow-lg transition-all duration-300`}
+                    className={`aspect-[3/4] rounded-2xl bg-gradient-to-br ${gradients[i]} overflow-hidden relative border border-border/30 group-hover:shadow-xl transition-all duration-500`}
                   >
+                    <motion.div
+                      className="absolute inset-0 bg-black/0 group-hover:bg-black/[0.02] transition-colors duration-500"
+                    />
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="text-center">
-                        <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-white/80 backdrop-blur flex items-center justify-center shadow-sm">
+                        <div className="w-16 h-16 mx-auto mb-3 rounded-2xl bg-white/80 backdrop-blur flex items-center justify-center shadow-sm group-hover:scale-110 group-hover:shadow-lg transition-all duration-300">
                           <Icon
                             size={28}
-                            className="text-gray-400"
+                            className="text-gray-400 group-hover:text-accent transition-colors duration-300"
                             strokeWidth={1.5}
                           />
                         </div>
@@ -63,18 +75,18 @@ export default function InteriorShowcase() {
                     </div>
                   </div>
                   <div className="mt-4">
-                    <h3 className="text-base font-semibold text-primary">
+                    <h3 className="text-base font-semibold text-primary group-hover:text-accent transition-colors duration-300">
                       {t(space.title)}
                     </h3>
                     <p className="text-sm text-gray-500 mt-1">
                       {t(space.description)}
                     </p>
                   </div>
-                </div>
-              </FadeIn>
+                </motion.div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

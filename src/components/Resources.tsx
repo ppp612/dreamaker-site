@@ -1,7 +1,8 @@
 "use client";
 
 import { FileText, BookOpen, Users, Download, LucideIcon } from "lucide-react";
-import FadeIn from "./FadeIn";
+import { motion } from "framer-motion";
+import FadeIn, { StaggerContainer, StaggerItem } from "./FadeIn";
 import { useLanguage } from "@/i18n/LanguageContext";
 import translations from "@/i18n/translations";
 
@@ -12,7 +13,9 @@ export default function Resources() {
   const r = translations.resources;
 
   return (
-    <section id="resources" className="py-24 lg:py-32 bg-muted">
+    <section id="resources" className="py-24 lg:py-32 bg-muted relative overflow-hidden">
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="max-w-3xl mx-auto text-center mb-16">
           <FadeIn>
@@ -32,13 +35,19 @@ export default function Resources() {
           </FadeIn>
         </div>
 
-        <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+        <StaggerContainer
+          className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+          staggerDelay={0.12}
+        >
           {r.items.map((resource, i) => {
             const Icon = resourceIcons[i];
             return (
-              <FadeIn key={i} delay={0.1 * i}>
-                <div className="group bg-white rounded-2xl p-7 border border-border/40 hover:border-accent/30 hover:shadow-lg hover:shadow-accent/5 transition-all duration-300 h-full flex flex-col">
-                  <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center mb-5 group-hover:bg-accent/10 transition-colors">
+              <StaggerItem key={i}>
+                <motion.div
+                  whileHover={{ y: -6, transition: { duration: 0.3 } }}
+                  className="group bg-white rounded-2xl p-7 border border-border/40 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 transition-all duration-500 h-full flex flex-col"
+                >
+                  <div className="w-12 h-12 rounded-xl bg-muted flex items-center justify-center mb-5 group-hover:bg-accent/10 group-hover:scale-110 transition-all duration-300">
                     <Icon
                       size={22}
                       className="text-accent"
@@ -51,15 +60,18 @@ export default function Resources() {
                   <p className="text-sm text-gray-500 leading-relaxed mb-6 flex-1">
                     {t(resource.description)}
                   </p>
-                  <button className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-dark transition-colors">
+                  <motion.button
+                    whileHover={{ x: 4 }}
+                    className="inline-flex items-center gap-2 text-sm font-semibold text-accent hover:text-accent-dark transition-colors"
+                  >
                     <Download size={16} />
                     {t(resource.button)}
-                  </button>
-                </div>
-              </FadeIn>
+                  </motion.button>
+                </motion.div>
+              </StaggerItem>
             );
           })}
-        </div>
+        </StaggerContainer>
       </div>
     </section>
   );

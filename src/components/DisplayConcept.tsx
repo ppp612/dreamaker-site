@@ -1,7 +1,13 @@
 "use client";
 
 import { Bed, Bath, Maximize2, Sun, LucideIcon } from "lucide-react";
-import FadeIn from "./FadeIn";
+import {
+  motion,
+  useScroll,
+  useTransform,
+} from "framer-motion";
+import { useRef } from "react";
+import FadeIn, { StaggerContainer, StaggerItem } from "./FadeIn";
 import { useLanguage } from "@/i18n/LanguageContext";
 import translations from "@/i18n/translations";
 
@@ -10,17 +16,31 @@ const statIcons: LucideIcon[] = [Maximize2, Bed, Bath, Sun];
 export default function DisplayConcept() {
   const { t } = useLanguage();
   const d = translations.display;
+  const sectionRef = useRef<HTMLElement>(null);
+  const { scrollYProgress } = useScroll({
+    target: sectionRef,
+    offset: ["start end", "end start"],
+  });
+
+  const imageY = useTransform(scrollYProgress, [0, 1], [40, -40]);
+  const badgeScale = useTransform(scrollYProgress, [0.2, 0.5], [0.9, 1]);
 
   return (
-    <section id="display" className="py-24 lg:py-32 bg-muted">
+    <section
+      ref={sectionRef}
+      id="display"
+      className="py-24 lg:py-32 bg-muted relative overflow-hidden"
+    >
+      <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
+
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16 items-center">
-          <FadeIn direction="right">
-            <div className="relative">
-              <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-primary/5 via-gray-100 to-accent/5 overflow-hidden relative">
+          <FadeIn direction="right" distance={50} duration={0.9}>
+            <motion.div style={{ y: imageY }} className="relative">
+              <div className="aspect-[4/3] rounded-3xl bg-gradient-to-br from-primary/5 via-gray-100 to-accent/5 overflow-hidden relative group">
                 <div className="absolute inset-0 flex items-center justify-center">
                   <div className="text-center">
-                    <div className="w-24 h-24 mx-auto mb-4 rounded-3xl bg-white/80 backdrop-blur flex items-center justify-center shadow-sm">
+                    <div className="w-24 h-24 mx-auto mb-4 rounded-3xl bg-white/80 backdrop-blur flex items-center justify-center shadow-sm group-hover:scale-110 transition-transform duration-500">
                       <svg
                         width="40"
                         height="40"
@@ -46,15 +66,18 @@ export default function DisplayConcept() {
                 </div>
               </div>
 
-              <div className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-5 py-3 shadow-xl shadow-black/5 border border-border/60">
+              <motion.div
+                style={{ scale: badgeScale }}
+                className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-5 py-3 shadow-xl shadow-black/5 border border-border/60 animate-float-delayed"
+              >
                 <p className="text-xs font-semibold text-accent uppercase tracking-wider">
                   {t(d.floatingLabel)}
                 </p>
                 <p className="text-sm font-bold text-primary mt-0.5">
                   {t(d.floatingTitle)}
                 </p>
-              </div>
-            </div>
+              </motion.div>
+            </motion.div>
           </FadeIn>
 
           <div>
@@ -63,7 +86,7 @@ export default function DisplayConcept() {
                 {t(d.label)}
               </p>
             </FadeIn>
-            <FadeIn delay={0.1}>
+            <FadeIn delay={0.1} distance={35}>
               <h2 className="text-3xl sm:text-4xl font-bold text-primary tracking-tight whitespace-pre-line">
                 {t(d.title)}
               </h2>
@@ -74,18 +97,23 @@ export default function DisplayConcept() {
               </p>
             </FadeIn>
 
-            <FadeIn delay={0.3}>
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10">
-                {d.stats.map((stat, i) => {
-                  const Icon = statIcons[i];
-                  const value =
-                    typeof stat.value === "string"
-                      ? stat.value
-                      : t(stat.value);
-                  return (
-                    <div
-                      key={i}
-                      className="bg-white rounded-2xl p-5 border border-border/40 text-center"
+            <StaggerContainer
+              className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10"
+              staggerDelay={0.1}
+            >
+              {d.stats.map((stat, i) => {
+                const Icon = statIcons[i];
+                const value =
+                  typeof stat.value === "string" ? stat.value : t(stat.value);
+                return (
+                  <StaggerItem key={i}>
+                    <motion.div
+                      whileHover={{
+                        y: -4,
+                        scale: 1.03,
+                        transition: { duration: 0.25 },
+                      }}
+                      className="bg-white rounded-2xl p-5 border border-border/40 text-center hover:shadow-lg hover:border-accent/20 transition-all duration-300"
                     >
                       <Icon
                         size={20}
@@ -98,26 +126,30 @@ export default function DisplayConcept() {
                       <p className="text-xs text-gray-400 mt-1">
                         {t(stat.label)}
                       </p>
-                    </div>
-                  );
-                })}
-              </div>
-            </FadeIn>
+                    </motion.div>
+                  </StaggerItem>
+                );
+              })}
+            </StaggerContainer>
 
             <FadeIn delay={0.4}>
               <div className="flex flex-wrap gap-4 mt-8">
-                <a
+                <motion.a
                   href="#contact"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white font-medium rounded-full hover:bg-primary/90 transition-all hover:shadow-lg hover:shadow-primary/20"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white font-medium rounded-full hover:bg-primary/90 transition-colors hover:shadow-xl hover:shadow-primary/20"
                 >
                   {t(d.ctaPrimary)}
-                </a>
-                <a
+                </motion.a>
+                <motion.a
                   href="#resources"
-                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-border text-primary font-medium rounded-full hover:bg-white transition-all"
+                  whileHover={{ scale: 1.03, y: -2 }}
+                  whileTap={{ scale: 0.98 }}
+                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-border text-primary font-medium rounded-full hover:bg-white transition-colors hover:border-accent/30"
                 >
                   {t(d.ctaSecondary)}
-                </a>
+                </motion.a>
               </div>
             </FadeIn>
 
