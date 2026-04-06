@@ -29,7 +29,7 @@ export default function DisplayConcept() {
     <section
       ref={sectionRef}
       id="display"
-      className="py-24 lg:py-32 bg-muted relative overflow-hidden"
+      className="py-16 sm:py-24 lg:py-32 bg-muted relative overflow-hidden"
     >
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
@@ -68,7 +68,7 @@ export default function DisplayConcept() {
 
               <motion.div
                 style={{ scale: badgeScale }}
-                className="absolute -bottom-4 -left-4 bg-white rounded-2xl px-5 py-3 shadow-xl shadow-black/5 border border-border/60 animate-float-delayed"
+                className="hidden sm:block absolute -bottom-4 -left-4 bg-white rounded-2xl px-5 py-3 shadow-xl shadow-black/5 border border-border/60 animate-float-delayed"
               >
                 <p className="text-xs font-semibold text-accent uppercase tracking-wider">
                   {t(d.floatingLabel)}
@@ -98,7 +98,7 @@ export default function DisplayConcept() {
             </FadeIn>
 
             <StaggerContainer
-              className="grid grid-cols-2 sm:grid-cols-4 gap-4 mt-10"
+              className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 mt-10"
               staggerDelay={0.1}
             >
               {d.stats.map((stat, i) => {
@@ -120,7 +120,7 @@ export default function DisplayConcept() {
                         className="text-accent mx-auto mb-2"
                         strokeWidth={1.5}
                       />
-                      <p className="text-2xl font-bold text-primary">
+                      <p className="text-xl sm:text-2xl font-bold text-primary">
                         {value}
                       </p>
                       <p className="text-xs text-gray-400 mt-1">
@@ -138,7 +138,7 @@ export default function DisplayConcept() {
                   href="#contact"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white font-medium rounded-full hover:bg-primary/90 transition-colors hover:shadow-xl hover:shadow-primary/20"
+                  className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 bg-primary text-white text-sm sm:text-base font-medium rounded-full hover:bg-primary/90 transition-colors hover:shadow-xl hover:shadow-primary/20"
                 >
                   {t(d.ctaPrimary)}
                 </motion.a>
@@ -146,7 +146,7 @@ export default function DisplayConcept() {
                   href="#resources"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-border text-primary font-medium rounded-full hover:bg-white transition-colors hover:border-accent/30"
+                  className="inline-flex items-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 border border-border text-primary text-sm sm:text-base font-medium rounded-full hover:bg-white transition-colors hover:border-accent/30"
                 >
                   {t(d.ctaSecondary)}
                 </motion.a>

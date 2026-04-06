@@ -13,7 +13,7 @@ export default function BusinessSummary() {
   const b = translations.business;
 
   return (
-    <section id="about" className="py-24 lg:py-32 bg-white relative overflow-hidden">
+    <section id="about" className="py-16 sm:py-24 lg:py-32 bg-white relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -36,7 +36,7 @@ export default function BusinessSummary() {
         </div>
 
         <StaggerContainer
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
           staggerDelay={0.12}
         >
           {b.pillars.map((pillar, i) => {
@@ -45,7 +45,7 @@ export default function BusinessSummary() {
               <StaggerItem key={i}>
                 <motion.div
                   whileHover={{ y: -6, transition: { duration: 0.3 } }}
-                  className="group p-6 rounded-2xl bg-muted border border-border/40 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 transition-all duration-500 h-full"
+                  className="group p-4 sm:p-6 rounded-2xl bg-muted border border-border/40 hover:border-accent/30 hover:shadow-xl hover:shadow-accent/5 transition-all duration-500 h-full"
                 >
                   <div className="w-12 h-12 rounded-xl bg-white flex items-center justify-center mb-5 shadow-sm group-hover:shadow-lg group-hover:scale-110 transition-all duration-300">
                     <Icon
@@ -54,10 +54,10 @@ export default function BusinessSummary() {
                       strokeWidth={1.5}
                     />
                   </div>
-                  <h3 className="text-lg font-semibold text-primary mb-2">
+                  <h3 className="text-base sm:text-lg font-semibold text-primary mb-2">
                     {t(pillar.title)}
                   </h3>
-                  <p className="text-sm text-gray-500 leading-relaxed">
+                  <p className="text-xs sm:text-sm text-gray-500 leading-relaxed">
                     {t(pillar.description)}
                   </p>
                 </motion.div>

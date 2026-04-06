@@ -13,7 +13,7 @@ export default function WhySteel() {
   const w = translations.whySteel;
 
   return (
-    <section id="why-steel" className="py-24 lg:py-32 bg-white relative overflow-hidden">
+    <section id="why-steel" className="py-16 sm:py-24 lg:py-32 bg-white relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">

@@ -21,7 +21,7 @@ export default function Services() {
   const s = translations.services;
 
   return (
-    <section id="services" className="py-24 lg:py-32 bg-muted relative overflow-hidden">
+    <section id="services" className="py-16 sm:py-24 lg:py-32 bg-muted relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">

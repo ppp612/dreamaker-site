@@ -61,7 +61,7 @@ export default function Hero() {
             </FadeIn>
 
             <FadeIn delay={0.15} duration={0.9} distance={40}>
-              <h1 className="text-4xl sm:text-5xl lg:text-6xl font-bold text-primary leading-[1.1] tracking-tight">
+              <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-primary leading-[1.1] tracking-tight">
                 {t(h.headlineMain)}
                 <motion.span
                   initial={{ opacity: 0, x: -20 }}
@@ -86,7 +86,7 @@ export default function Hero() {
                   href="#applications"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 px-7 py-3.5 bg-primary text-white font-medium rounded-full hover:bg-primary/90 transition-colors hover:shadow-xl hover:shadow-primary/20"
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 bg-primary text-white text-sm sm:text-base font-medium rounded-full hover:bg-primary/90 transition-colors hover:shadow-xl hover:shadow-primary/20"
                 >
                   {t(h.ctaPrimary)}
                   <motion.span
@@ -100,7 +100,7 @@ export default function Hero() {
                   href="#display"
                   whileHover={{ scale: 1.03, y: -2 }}
                   whileTap={{ scale: 0.98 }}
-                  className="inline-flex items-center gap-2 px-7 py-3.5 border border-border text-primary font-medium rounded-full hover:bg-muted transition-colors hover:border-accent/30"
+                  className="inline-flex items-center justify-center gap-2 px-6 sm:px-7 py-3 sm:py-3.5 border border-border text-primary text-sm sm:text-base font-medium rounded-full hover:bg-muted transition-colors hover:border-accent/30"
                 >
                   {t(h.ctaSecondary)}
                 </motion.a>
@@ -108,20 +108,24 @@ export default function Hero() {
             </FadeIn>
 
             <FadeIn delay={0.6}>
-              <div className="flex items-center gap-8 mt-12 pt-8 border-t border-border/60">
+              <div className="grid grid-cols-3 mt-12 pt-8 border-t border-border/60">
                 {[
                   { title: h.statSteelTitle, sub: h.statSteelSub },
                   { title: h.statModularTitle, sub: h.statModularSub },
                   { title: h.statAuTitle, sub: h.statAuSub },
                 ].map((stat, i) => (
-                  <div key={i} className="flex items-center gap-8">
-                    {i > 0 && <div className="w-px h-10 bg-border -ml-8" />}
-                    <div>
-                      <p className="text-2xl font-bold text-primary">
-                        {t(stat.title)}
-                      </p>
-                      <p className="text-sm text-gray-500">{t(stat.sub)}</p>
-                    </div>
+                  <div
+                    key={i}
+                    className={`text-center sm:text-left ${
+                      i > 0 ? "border-l border-border/60" : ""
+                    }`}
+                  >
+                    <p className="text-lg sm:text-2xl font-bold text-primary">
+                      {t(stat.title)}
+                    </p>
+                    <p className="text-[11px] sm:text-sm text-gray-500 mt-0.5">
+                      {t(stat.sub)}
+                    </p>
                   </div>
                 ))}
               </div>
@@ -154,7 +158,7 @@ export default function Hero() {
                     </p>
                   </div>
                 </div>
-                <div className="absolute bottom-4 left-4 right-4 flex gap-2">
+                <div className="absolute bottom-4 left-4 right-4 flex flex-wrap gap-2">
                   {[h.tagSteel, h.tagPrefab, h.tagModular].map((tag, i) => (
                     <motion.div
                       key={i}
@@ -171,7 +175,7 @@ export default function Hero() {
 
               <motion.div
                 style={{ y: floatingY }}
-                className="absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-xl shadow-black/5 border border-border/60 animate-float"
+                className="hidden sm:block absolute -bottom-4 -right-4 bg-white rounded-2xl p-4 shadow-xl shadow-black/5 border border-border/60 animate-float"
               >
                 <p className="text-xs text-gray-400 font-medium">
                   {t(h.floatingLabel)}
@@ -181,6 +185,20 @@ export default function Hero() {
                 </p>
                 <p className="text-xs text-gray-500">{t(h.floatingDesc)}</p>
               </motion.div>
+
+              <div className="sm:hidden mt-4 bg-white rounded-2xl p-4 shadow-lg shadow-black/5 border border-border/60">
+                <div className="flex items-center justify-between">
+                  <div>
+                    <p className="text-xs text-gray-400 font-medium">
+                      {t(h.floatingLabel)}
+                    </p>
+                    <p className="text-base font-bold text-primary mt-0.5">
+                      {t(h.floatingTitle)}
+                    </p>
+                  </div>
+                  <p className="text-xs text-gray-500">{t(h.floatingDesc)}</p>
+                </div>
+              </div>
             </motion.div>
           </FadeIn>
         </div>

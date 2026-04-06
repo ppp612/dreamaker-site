@@ -19,7 +19,7 @@ export default function InteriorShowcase() {
   const n = translations.interior;
 
   return (
-    <section className="py-24 lg:py-32 bg-white relative overflow-hidden">
+    <section className="py-16 sm:py-24 lg:py-32 bg-white relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -42,7 +42,7 @@ export default function InteriorShowcase() {
         </div>
 
         <StaggerContainer
-          className="grid sm:grid-cols-2 lg:grid-cols-4 gap-6"
+          className="grid grid-cols-2 lg:grid-cols-4 gap-4 sm:gap-6"
           staggerDelay={0.12}
         >
           {n.spaces.map((space, i) => {

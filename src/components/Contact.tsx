@@ -18,7 +18,7 @@ export default function Contact() {
   };
 
   return (
-    <section id="contact" className="py-24 lg:py-32 bg-white relative overflow-hidden">
+    <section id="contact" className="py-16 sm:py-24 lg:py-32 bg-white relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -94,7 +94,7 @@ export default function Contact() {
                   initial={{ opacity: 0, scale: 0.95 }}
                   animate={{ opacity: 1, scale: 1 }}
                   transition={{ duration: 0.5, ease: "easeOut" }}
-                  className="bg-muted rounded-3xl p-10 border border-border/40 flex items-center justify-center min-h-[500px]"
+                  className="bg-muted rounded-3xl p-8 sm:p-10 border border-border/40 flex items-center justify-center min-h-[300px] sm:min-h-[500px]"
                 >
                   <div className="text-center">
                     <motion.div
@@ -121,7 +121,7 @@ export default function Contact() {
                 <motion.form
                   key="form"
                   onSubmit={handleSubmit}
-                  className="bg-muted rounded-3xl p-8 lg:p-10 border border-border/40"
+                  className="bg-muted rounded-3xl p-6 sm:p-8 lg:p-10 border border-border/40"
                 >
                   <div className="space-y-5">
                     <div>

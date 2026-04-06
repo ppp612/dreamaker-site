@@ -13,7 +13,7 @@ export default function Resources() {
   const r = translations.resources;
 
   return (
-    <section id="resources" className="py-24 lg:py-32 bg-muted relative overflow-hidden">
+    <section id="resources" className="py-16 sm:py-24 lg:py-32 bg-muted relative overflow-hidden">
       <div className="absolute top-0 left-1/2 -translate-x-1/2 w-[800px] h-px bg-gradient-to-r from-transparent via-border to-transparent" />
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8">
@@ -36,7 +36,7 @@ export default function Resources() {
         </div>
 
         <StaggerContainer
-          className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto"
+          className="grid sm:grid-cols-2 md:grid-cols-3 gap-4 sm:gap-6 max-w-5xl mx-auto"
           staggerDelay={0.12}
         >
           {r.items.map((resource, i) => {
