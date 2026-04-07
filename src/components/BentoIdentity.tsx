@@ -91,9 +91,7 @@ export default function BentoIdentity() {
                 whileHover={{ y: -4 }}
                 className="h-full rounded-3xl border border-border/50 bg-white p-6 sm:p-7 transition-shadow duration-300 hover:shadow-lg hover:shadow-accent/5"
               >
-                <p className="text-xs font-semibold uppercase tracking-wider text-accent mb-4">
-                  {String(i + 1).padStart(2, "0")}
-                </p>
+                <div className="w-8 h-px bg-accent/40 mb-5" />
                 <h3 className="text-base sm:text-lg font-semibold text-primary mb-2">
                   {t(svc.title)}
                 </h3>

@@ -55,9 +55,7 @@ export default function BentoCapabilities() {
                 whileHover={{ y: -4 }}
                 className={`h-full rounded-3xl p-6 sm:p-7 transition-all duration-300 ${bgStyles[i]}`}
               >
-                <p className={`text-[10px] font-semibold uppercase tracking-widest mb-4 ${isDark(i) ? "text-white/40" : "text-accent"}`}>
-                  {String(i + 1).padStart(2, "0")}
-                </p>
+                <div className={`w-6 h-px mb-5 ${isDark(i) ? "bg-white/20" : "bg-accent/40"}`} />
                 <h3 className={`text-base sm:text-lg font-semibold mb-2 ${isDark(i) ? "text-white" : "text-primary"}`}>
                   {t(area.title)}
                 </h3>
@@ -87,9 +85,7 @@ export default function BentoCapabilities() {
                   whileHover={{ y: -4 }}
                   className={`h-full rounded-3xl p-6 sm:p-7 transition-all duration-300 ${bgStyles[idx]}`}
                 >
-                  <p className={`text-[10px] font-semibold uppercase tracking-widest mb-4 ${isDark(idx) ? "text-white/40" : "text-accent"}`}>
-                    {String(idx + 1).padStart(2, "0")}
-                  </p>
+                  <div className={`w-6 h-px mb-5 ${isDark(idx) ? "bg-white/20" : "bg-accent/40"}`} />
                   <h3 className={`text-base sm:text-lg font-semibold mb-2 ${isDark(idx) ? "text-white" : "text-primary"}`}>
                     {t(area.title)}
                   </h3>

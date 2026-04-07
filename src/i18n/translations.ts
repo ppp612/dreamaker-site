@@ -22,8 +22,8 @@ const translations = {
       zh: "整合能力 驱动落地",
     },
     description: {
-      en: "We help clients navigate complex projects through consulting, coordination, resource integration, and practical solution design.",
-      zh: "通过咨询、协调、资源整合和务实方案设计，帮助客户理清项目路径，推动落地。",
+      en: "We help clients navigate complex projects through consulting, coordination, and practical solution design — backed by real steel structure and supply capability.",
+      zh: "通过咨询、协调和务实方案设计，帮助客户理清项目路径——以真实的钢结构与供应能力为支撑。",
     },
     ctaPrimary: { en: "Explore Our Services", zh: "了解服务内容" },
     ctaSecondary: { en: "Discuss Your Project", zh: "聊聊您的项目" },
@@ -32,8 +32,8 @@ const translations = {
   // ─── Bento Identity (Who We Are + What We Do merged) ────────────
   bento: {
     companyIntro: {
-      en: "DREAMAKER PTY LTD is a consulting, coordination, and project support company based in Australia. We combine strategic thinking with resource understanding and hands-on solution support — bridging the gap between vision and delivery.",
-      zh: "DREAMAKER PTY LTD 是一家立足澳洲的咨询、协调与项目支持公司。我们将策略思维与资源理解和务实方案相结合——弥合愿景与执行之间的距离。",
+      en: "DREAMAKER PTY LTD is a service-led project support company based in Australia — combining consulting and coordination with integrated steel structure, material, and supply capability. We bridge the gap between vision and delivery.",
+      zh: "DREAMAKER PTY LTD 是一家立足澳洲的服务型项目支持公司——将咨询与协调同钢结构、材料和供应能力深度整合，弥合愿景与执行之间的距离。",
     },
     quote: {
       en: "We start with understanding.",
@@ -71,11 +71,58 @@ const translations = {
   // ─── Statement ──────────────────────────────────────────────────
   statement: {
     text: {
-      en: "Consulting that connects vision to structured delivery.",
-      zh: "将愿景与有序交付相连接的咨询服务。",
+      en: "Service-led thinking, backed by real steel structure and supply capability.",
+      zh: "以服务思维引领，以真实的钢结构与供应能力为支撑。",
     },
     attribution: { en: "DREAMAKER PTY LTD", zh: "DREAMAKER PTY LTD" },
     cta: { en: "Learn how we work", zh: "了解我们的方式" },
+  },
+
+  // ─── Steel Capability ─────────────────────────────────────────
+  steelCapability: {
+    label: { en: "Integrated Strength", zh: "整合实力" },
+    title: {
+      en: "Consulting Backed by\nReal Supply Capability",
+      zh: "咨询服务的背后\n是真实的供应能力",
+    },
+    description: {
+      en: "We don't just advise — we bring tangible steel structure expertise, material knowledge, and supply chain capability into every engagement. This is what makes our consulting grounded, practical, and deliverable.",
+      zh: "我们不仅仅是建议——每一次合作都融入了真实的钢结构专业知识、材料理解和供应链能力。这正是我们的咨询之所以务实、可落地的根本所在。",
+    },
+    points: [
+      {
+        number: "01",
+        title: { en: "Steel Frame Systems", zh: "钢框架体系" },
+        description: {
+          en: "Deep understanding of light and heavy steel frame systems — from specification to sourcing to project integration.",
+          zh: "对轻钢和重钢框架体系的深入理解——从规格选型到采购对接再到项目整合。",
+        },
+      },
+      {
+        number: "02",
+        title: { en: "Material & Supply Networks", zh: "材料与供应网络" },
+        description: {
+          en: "Established relationships with steel suppliers, manufacturers, and logistics partners across key markets.",
+          zh: "在核心市场建立的钢材供应商、制造商和物流伙伴关系网络。",
+        },
+      },
+      {
+        number: "03",
+        title: { en: "Manufacturing-Backed Insight", zh: "制造端洞察" },
+        description: {
+          en: "Real production knowledge that shapes recommendations — not theoretical, but grounded in how things actually get built.",
+          zh: "来自真实生产环节的知识——不是理论推演，而是基于实际建造经验的判断。",
+        },
+      },
+      {
+        number: "04",
+        title: { en: "Integrated Project Delivery", zh: "整合项目交付" },
+        description: {
+          en: "The ability to connect consulting insight directly to material supply and structural solutions — closing the gap between strategy and execution.",
+          zh: "将咨询洞察与材料供应和结构方案直接打通——弥合策略与执行之间的断层。",
+        },
+      },
+    ],
   },
 
   // ─── How We Support Projects ────────────────────────────────────

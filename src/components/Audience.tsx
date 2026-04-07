@@ -34,10 +34,7 @@ export default function Audience() {
                   className="flex items-start sm:items-center justify-between gap-4 py-7 sm:py-8"
                 >
                   <div className="flex-1 min-w-0">
-                    <div className="flex items-baseline gap-4 sm:gap-6">
-                      <span className="text-xs text-gray-300 tabular-nums font-light shrink-0">
-                        {String(i + 1).padStart(2, "0")}
-                      </span>
+                    <div className="flex items-baseline gap-4">
                       <h3 className="text-xl sm:text-2xl lg:text-3xl font-light text-primary group-hover:text-accent transition-colors duration-300">
                         {t(item.title)}
                       </h3>
@@ -50,7 +47,7 @@ export default function Audience() {
                           animate={{ height: "auto", opacity: 1 }}
                           exit={{ height: 0, opacity: 0 }}
                           transition={{ duration: 0.3, ease: "easeInOut" }}
-                          className="overflow-hidden text-sm text-gray-500 pl-8 sm:pl-12 lg:pl-14 max-w-lg"
+                          className="overflow-hidden text-sm text-gray-500 max-w-lg"
                         >
                           <span className="block pt-3 pb-1">
                             {t(item.description)}

@@ -7,6 +7,7 @@ import Hero from "@/components/Hero";
 import BentoIdentity from "@/components/BentoIdentity";
 import Statement from "@/components/Statement";
 import HowWeSupport from "@/components/HowWeSupport";
+import SteelCapability from "@/components/SteelCapability";
 import BentoCapabilities from "@/components/BentoCapabilities";
 import Audience from "@/components/Audience";
 import Contact from "@/components/Contact";
@@ -22,6 +23,7 @@ export default function Home() {
           <BentoIdentity />
           <Statement />
           <HowWeSupport />
+          <SteelCapability />
           <BentoCapabilities />
           <Audience />
           <Contact />
