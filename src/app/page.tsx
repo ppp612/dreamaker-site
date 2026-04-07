@@ -4,14 +4,11 @@ import { LanguageProvider } from "@/i18n/LanguageContext";
 import SmoothScroll from "@/components/SmoothScroll";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
-import BusinessSummary from "@/components/BusinessSummary";
-import AudienceSplit from "@/components/AudienceSplit";
-import Applications from "@/components/Applications";
-import DisplayConcept from "@/components/DisplayConcept";
-import WhySteel from "@/components/WhySteel";
-import Services from "@/components/Services";
-import InteriorShowcase from "@/components/InteriorShowcase";
-import Resources from "@/components/Resources";
+import BentoIdentity from "@/components/BentoIdentity";
+import Statement from "@/components/Statement";
+import HowWeSupport from "@/components/HowWeSupport";
+import BentoCapabilities from "@/components/BentoCapabilities";
+import Audience from "@/components/Audience";
 import Contact from "@/components/Contact";
 import Footer from "@/components/Footer";
 
@@ -22,14 +19,11 @@ export default function Home() {
         <Header />
         <main>
           <Hero />
-          <BusinessSummary />
-          <AudienceSplit />
-          <Applications />
-          <DisplayConcept />
-          <WhySteel />
-          <Services />
-          <InteriorShowcase />
-          <Resources />
+          <BentoIdentity />
+          <Statement />
+          <HowWeSupport />
+          <BentoCapabilities />
+          <Audience />
           <Contact />
         </main>
         <Footer />

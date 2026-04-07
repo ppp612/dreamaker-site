@@ -8,11 +8,9 @@ import translations from "@/i18n/translations";
 
 const navItems = [
   { key: "about" as const, href: "#about" },
-  { key: "applications" as const, href: "#applications" },
-  { key: "displayConcept" as const, href: "#display" },
-  { key: "whySteel" as const, href: "#why-steel" },
-  { key: "services" as const, href: "#services" },
-  { key: "resources" as const, href: "#resources" },
+  { key: "services" as const, href: "#about" },
+  { key: "approach" as const, href: "#approach" },
+  { key: "capabilities" as const, href: "#capabilities" },
   { key: "contact" as const, href: "#contact" },
 ];
 
@@ -63,9 +61,9 @@ export default function Header() {
         <nav className="hidden lg:flex items-center gap-1">
           {navItems.map((item) => (
             <a
-              key={item.href}
+              key={item.key}
               href={item.href}
-              className="relative px-3 py-2 text-sm text-gray-600 hover:text-primary transition-colors rounded-lg group"
+              className="relative px-3 py-2 text-sm text-gray-500 hover:text-primary transition-colors rounded-lg group"
             >
               {t(nav[item.key])}
               <span className="absolute bottom-0.5 left-3 right-3 h-px bg-accent scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left" />
@@ -76,23 +74,15 @@ export default function Header() {
         <div className="hidden lg:flex items-center gap-3">
           <button
             onClick={toggleLocale}
-            className="px-3 py-1.5 text-xs font-medium text-gray-500 hover:text-primary border border-border/60 rounded-full hover:bg-gray-50 transition-all duration-300 hover:border-accent/40"
+            className="px-3 py-1.5 text-xs font-medium text-gray-500 hover:text-primary border border-border/60 rounded-full hover:bg-gray-50 transition-all duration-300"
           >
-            <span
-              className={locale === "en" ? "text-primary font-semibold" : ""}
-            >
-              EN
-            </span>
+            <span className={locale === "en" ? "text-primary font-semibold" : ""}>EN</span>
             <span className="mx-1.5 text-border">|</span>
-            <span
-              className={locale === "zh" ? "text-primary font-semibold" : ""}
-            >
-              中文
-            </span>
+            <span className={locale === "zh" ? "text-primary font-semibold" : ""}>中文</span>
           </button>
           <a
             href="#contact"
-            className="px-5 py-2.5 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/20 hover:-translate-y-0.5"
+            className="px-5 py-2.5 bg-primary text-white text-sm font-medium rounded-full hover:bg-primary/90 transition-all duration-300 hover:shadow-lg hover:shadow-primary/15 hover:-translate-y-0.5"
           >
             {t(nav.getInTouch)}
           </a>
@@ -101,19 +91,11 @@ export default function Header() {
         <div className="flex lg:hidden items-center gap-2">
           <button
             onClick={toggleLocale}
-            className="px-2.5 py-1.5 text-xs font-medium text-gray-500 hover:text-primary border border-border/60 rounded-full hover:bg-gray-50 transition-all"
+            className="px-2.5 py-1.5 text-xs font-medium text-gray-500 border border-border/60 rounded-full"
           >
-            <span
-              className={locale === "en" ? "text-primary font-semibold" : ""}
-            >
-              EN
-            </span>
+            <span className={locale === "en" ? "text-primary font-semibold" : ""}>EN</span>
             <span className="mx-1 text-border">|</span>
-            <span
-              className={locale === "zh" ? "text-primary font-semibold" : ""}
-            >
-              中文
-            </span>
+            <span className={locale === "zh" ? "text-primary font-semibold" : ""}>中文</span>
           </button>
           <button
             onClick={() => setMobileOpen(!mobileOpen)}
@@ -134,7 +116,7 @@ export default function Header() {
           <nav className="flex flex-col px-6 py-4 gap-1">
             {navItems.map((item) => (
               <a
-                key={item.href}
+                key={item.key}
                 href={item.href}
                 onClick={() => setMobileOpen(false)}
                 className="px-4 py-3 text-sm text-gray-600 hover:text-primary hover:bg-gray-50 rounded-lg transition-colors"
@@ -145,7 +127,7 @@ export default function Header() {
             <a
               href="#contact"
               onClick={() => setMobileOpen(false)}
-              className="mt-2 px-5 py-3 bg-primary text-white text-sm font-medium rounded-full text-center hover:bg-primary/90 transition-colors"
+              className="mt-2 px-5 py-3 bg-primary text-white text-sm font-medium rounded-full text-center"
             >
               {t(nav.getInTouch)}
             </a>

@@ -21,25 +21,24 @@ export default function Footer() {
       title: t(f.groupCompany),
       links: [
         { label: t(f.companyLinks.about), href: "#about" },
-        { label: t(f.companyLinks.applications), href: "#applications" },
-        { label: t(f.companyLinks.whySteel), href: "#why-steel" },
-        { label: t(f.companyLinks.services), href: "#services" },
+        { label: t(f.companyLinks.services), href: "#about" },
+        { label: t(f.companyLinks.approach), href: "#approach" },
       ],
     },
     {
-      title: t(f.groupResources),
+      title: t(f.groupServices),
       links: [
-        { label: t(f.resourceLinks.productSummary), href: "#resources" },
-        { label: t(f.resourceLinks.capabilityStatement), href: "#resources" },
-        { label: t(f.resourceLinks.builderGuide), href: "#resources" },
-        { label: t(f.resourceLinks.displayConcept), href: "#display" },
+        { label: t(f.serviceLinks.consulting), href: "#about" },
+        { label: t(f.serviceLinks.coordination), href: "#about" },
+        { label: t(f.serviceLinks.integration), href: "#capabilities" },
+        { label: t(f.serviceLinks.supply), href: "#capabilities" },
       ],
     },
     {
       title: t(f.groupConnect),
       links: [
         { label: t(f.connectLinks.contactUs), href: "#contact" },
-        { label: t(f.connectLinks.requestInfo), href: "#contact" },
+        { label: t(f.connectLinks.startConversation), href: "#contact" },
         { label: t(f.connectLinks.partnerWithUs), href: "#contact" },
       ],
     },
@@ -51,8 +50,8 @@ export default function Footer() {
 
       <div className="max-w-7xl mx-auto px-6 lg:px-8 py-16 lg:py-20">
         <FadeIn>
-          <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-8">
-            <div className="col-span-2 lg:col-span-2">
+          <div className="grid grid-cols-2 lg:grid-cols-5 gap-8">
+            <div className="col-span-2">
               <div className="flex items-center gap-2 mb-4">
                 <div className="w-8 h-8 rounded-lg bg-accent flex items-center justify-center">
                   <span className="text-primary font-bold text-sm">D</span>
@@ -99,16 +98,10 @@ export default function Footer() {
         <div className="max-w-7xl mx-auto px-6 lg:px-8 py-6 flex flex-col sm:flex-row items-center justify-between gap-4">
           <p className="text-xs text-white/30">{t(f.copyright)}</p>
           <div className="flex items-center gap-6">
-            <a
-              href="#"
-              className="text-xs text-white/30 hover:text-white/50 transition-colors duration-300"
-            >
+            <a href="#" className="text-xs text-white/30 hover:text-white/50 transition-colors duration-300">
               {t(f.privacy)}
             </a>
-            <a
-              href="#"
-              className="text-xs text-white/30 hover:text-white/50 transition-colors duration-300"
-            >
+            <a href="#" className="text-xs text-white/30 hover:text-white/50 transition-colors duration-300">
               {t(f.terms)}
             </a>
           </div>
