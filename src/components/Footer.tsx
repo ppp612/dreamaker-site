@@ -1,13 +1,20 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import FadeIn from "./FadeIn";
 import { useLanguage } from "@/i18n/LanguageContext";
 import translations from "@/i18n/translations";
+import { getSiteSettings, type SiteSettings } from "@/lib/api";
 
 export default function Footer() {
   const { t } = useLanguage();
   const f = translations.footer;
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+
+  useEffect(() => {
+    getSiteSettings().then(setSettings).catch(() => {});
+  }, []);
 
   const navGroups = [
     {
@@ -58,9 +65,9 @@ export default function Footer() {
                 {t(f.description)}
               </p>
               <div className="mt-6 space-y-2 text-sm text-white/40">
-                <p>{t(f.location)}</p>
-                <p>info@dreamaker.com.au</p>
-                <p>+61 2 0000 0000</p>
+                <p>{settings?.address || t(f.location)}</p>
+                <p>{settings?.email || "info@dreamaker.com.au"}</p>
+                <p>{settings?.phone || "+61 2 0000 0000"}</p>
               </div>
             </div>
 

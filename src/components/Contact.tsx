@@ -1,21 +1,55 @@
 "use client";
 
-import { useState, FormEvent } from "react";
-import { Send, MapPin, Mail, Phone, CheckCircle } from "lucide-react";
+import { useState, useEffect, useRef, FormEvent } from "react";
+import { Send, MapPin, Mail, Phone, CheckCircle, Loader2 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import FadeIn from "./FadeIn";
 import { useLanguage } from "@/i18n/LanguageContext";
 import translations from "@/i18n/translations";
+import { submitEnquiry, getSiteSettings, type SiteSettings } from "@/lib/api";
 
 export default function Contact() {
   const [submitted, setSubmitted] = useState(false);
+  const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState("");
+  const [settings, setSettings] = useState<SiteSettings | null>(null);
+  const formRef = useRef<HTMLFormElement>(null);
   const { t } = useLanguage();
   const c = translations.contact;
 
-  const handleSubmit = (e: FormEvent) => {
+  useEffect(() => {
+    getSiteSettings().then(setSettings).catch(() => {});
+  }, []);
+
+  const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
-    setSubmitted(true);
+    setSubmitting(true);
+    setError("");
+
+    const form = formRef.current;
+    if (!form) return;
+
+    const data = new FormData(form);
+    try {
+      await submitEnquiry({
+        name: data.get("name") as string,
+        email: data.get("email") as string,
+        phone: (data.get("phone") as string) || "",
+        role: data.get("role") as string,
+        location: (data.get("location") as string) || "",
+        message: data.get("message") as string,
+      });
+      setSubmitted(true);
+    } catch {
+      setError(t(c.formError));
+    } finally {
+      setSubmitting(false);
+    }
   };
+
+  const contactEmail = settings?.email || "info@dreamaker.com.au";
+  const contactPhone = settings?.phone || "+61 2 0000 0000";
+  const contactAddress = settings?.address || t(c.locationValue);
 
   return (
     <section id="contact" className="py-16 sm:py-24 lg:py-32 bg-white relative overflow-hidden">
@@ -46,17 +80,17 @@ export default function Contact() {
                   {
                     icon: MapPin,
                     label: c.locationLabel,
-                    value: t(c.locationValue),
+                    value: contactAddress,
                   },
                   {
                     icon: Mail,
                     label: c.emailLabel,
-                    value: "info@dreamaker.com.au",
+                    value: contactEmail,
                   },
                   {
                     icon: Phone,
                     label: c.phoneLabel,
-                    value: "+61 2 0000 0000",
+                    value: contactPhone,
                   },
                 ].map((item, i) => (
                   <motion.div
@@ -120,6 +154,7 @@ export default function Contact() {
               ) : (
                 <motion.form
                   key="form"
+                  ref={formRef}
                   onSubmit={handleSubmit}
                   className="bg-muted rounded-3xl p-6 sm:p-8 lg:p-10 border border-border/40"
                 >
@@ -129,6 +164,7 @@ export default function Contact() {
                         {t(c.formName)}
                       </label>
                       <input
+                        name="name"
                         type="text"
                         required
                         placeholder={t(c.formNamePlaceholder)}
@@ -142,6 +178,7 @@ export default function Contact() {
                           {t(c.formEmail)}
                         </label>
                         <input
+                          name="email"
                           type="email"
                           required
                           placeholder={t(c.formEmailPlaceholder)}
@@ -153,6 +190,7 @@ export default function Contact() {
                           {t(c.formPhone)}
                         </label>
                         <input
+                          name="phone"
                           type="tel"
                           placeholder={t(c.formPhonePlaceholder)}
                           className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm text-primary placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/40 transition-all duration-300"
@@ -165,6 +203,7 @@ export default function Contact() {
                         {t(c.formRole)}
                       </label>
                       <select
+                        name="role"
                         required
                         defaultValue=""
                         className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm text-primary focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/40 transition-all duration-300"
@@ -173,7 +212,7 @@ export default function Contact() {
                           {t(c.formRolePlaceholder)}
                         </option>
                         {c.formRoleOptions.map((option, i) => (
-                          <option key={i} value={option.en}>
+                          <option key={i} value={option.value}>
                             {t(option)}
                           </option>
                         ))}
@@ -185,6 +224,7 @@ export default function Contact() {
                         {t(c.formLocation)}
                       </label>
                       <input
+                        name="location"
                         type="text"
                         placeholder={t(c.formLocationPlaceholder)}
                         className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm text-primary placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/40 transition-all duration-300"
@@ -196,20 +236,31 @@ export default function Contact() {
                         {t(c.formMessage)}
                       </label>
                       <textarea
+                        name="message"
                         rows={4}
+                        required
                         placeholder={t(c.formMessagePlaceholder)}
                         className="w-full px-4 py-3 bg-white border border-border rounded-xl text-sm text-primary placeholder:text-gray-300 focus:outline-none focus:ring-2 focus:ring-accent/30 focus:border-accent/40 transition-all duration-300 resize-none"
                       />
                     </div>
 
+                    {error && (
+                      <p className="text-sm text-red-500 text-center">{error}</p>
+                    )}
+
                     <motion.button
                       type="submit"
-                      whileHover={{ scale: 1.01, y: -1 }}
-                      whileTap={{ scale: 0.99 }}
-                      className="w-full py-3.5 bg-primary text-white font-medium rounded-full hover:bg-primary/90 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 flex items-center justify-center gap-2"
+                      disabled={submitting}
+                      whileHover={submitting ? {} : { scale: 1.01, y: -1 }}
+                      whileTap={submitting ? {} : { scale: 0.99 }}
+                      className="w-full py-3.5 bg-primary text-white font-medium rounded-full hover:bg-primary/90 transition-all duration-300 hover:shadow-xl hover:shadow-primary/20 flex items-center justify-center gap-2 disabled:opacity-60 disabled:cursor-not-allowed"
                     >
-                      <Send size={16} />
-                      {t(c.formSubmit)}
+                      {submitting ? (
+                        <Loader2 size={16} className="animate-spin" />
+                      ) : (
+                        <Send size={16} />
+                      )}
+                      {submitting ? t(c.formSubmitting) : t(c.formSubmit)}
                     </motion.button>
 
                     <p className="text-xs text-gray-400 text-center">

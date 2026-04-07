@@ -463,11 +463,11 @@ const translations = {
     formRole: { en: "I am a...", zh: "我是..." },
     formRolePlaceholder: { en: "Select your role", zh: "请选择您的身份" },
     formRoleOptions: [
-      { en: "Homeowner / General Enquiry", zh: "业主 / 普通咨询" },
-      { en: "Builder / Contractor", zh: "建筑商 / 承建商" },
-      { en: "Developer", zh: "开发商" },
-      { en: "Designer / Architect", zh: "设计师 / 建筑师" },
-      { en: "Consultant / Other", zh: "顾问 / 其他" },
+      { value: "homeowner", en: "Homeowner / General Enquiry", zh: "业主 / 普通咨询" },
+      { value: "builder", en: "Builder / Contractor", zh: "建筑商 / 承建商" },
+      { value: "developer", en: "Developer", zh: "开发商" },
+      { value: "designer", en: "Designer / Architect", zh: "设计师 / 建筑师" },
+      { value: "consultant", en: "Consultant / Other", zh: "顾问 / 其他" },
     ],
     formLocation: { en: "Project Location", zh: "项目地点" },
     formLocationPlaceholder: { en: "Suburb, State", zh: "区域 / 城市" },
@@ -477,6 +477,11 @@ const translations = {
       zh: "简单描述一下您的项目或想了解的内容...",
     },
     formSubmit: { en: "Send Enquiry", zh: "提交咨询" },
+    formSubmitting: { en: "Submitting...", zh: "提交中..." },
+    formError: {
+      en: "Something went wrong. Please try again or email us directly.",
+      zh: "提交失败，请稍后重试或直接发送邮件联系我们。",
+    },
     formNote: {
       en: "We typically respond within 1–2 business days.",
       zh: "我们通常会在 1-2 个工作日内回复。",
